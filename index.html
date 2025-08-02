@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komal Wagh - Quality Assurance Engineer</title>
+    <meta name="description" content="Professional QA Engineer with expertise in manual testing, API testing, and performance testing. Experienced in JIRA, Postman, Selenium, and Agile methodologies.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --light-blue: #ecf0f1;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .website-header {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+            animation: float 20s linear infinite;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: var(--white);
+            border: 5px solid rgba(255,255,255,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .name {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .job-title {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            animation: slideUp 0.8s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .summary-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-group {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-group:hover {
+            transform: translateX(5px);
+        }
+        
+        .skill-group-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .experience-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .job-header {
+            margin-bottom: 15px;
+        }
+        
+        .job-title-exp {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .company-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 3px;
+        }
+        
+        .job-period {
+            color: var(--text-light);
+            font-style: italic;
+        }
+        
+        .achievements {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .achievement {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .achievement::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .education-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .education-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .degree {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .institution {
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        
+        .score {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .domains-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .domain-tag {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: var(--white);
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        
+        .domain-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+        
+        .footer-text {
+            color: var(--text-light);
+            font-size: 1em;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .hero-section {
+                padding: 40px 20px;
+            }
+            
+            .name {
+                font-size: 2.2em;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .name {
+                font-size: 1.8em;
+            }
+            
+            .job-title {
+                font-size: 1.2em;
+            }
+            
+            .domains-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                max-width: none;
+                padding: 0;
+            }
+            
+            .card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .download-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="website-header">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <div class="profile-photo">KW</div>
+                    <h1 class="name">KOMAL WAGH</h1>
+                    <p class="job-title">Quality Assurance Engineer</p>
+                    <div class="contact-links">
+                        <a href="tel:+919082120942" class="contact-link">
+                            📱 +91 9082120942
+                        </a>
+                        <a href="mailto:waghkomal2003@gmail.com" class="contact-link">
+                            ✉️ waghkomal2003@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/komalcode/" target="_blank" class="contact-link">
+                            🔗 LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Professional Summary -->
+        <div class="main-content">
+            <div class="card full-width">
+                <h2 class="section-title">Professional Summary</h2>
+                <p class="summary-text">
+                    Results-driven QA Engineer with 1+ year of experience in manual testing of complex web applications. Deep understanding of the full software development life cycle (SDLC) and all QA phases. Expertise in API testing with Postman, Performance testing with JMeter, and Database testing using SQL. Highly proficient in JIRA for defect tracking, creating detailed test cases, and actively contributing to Agile/Scrum ceremonies to improve development processes.
+                </p>
+            </div>
+        </div>
+
+        <!-- Skills and Experience -->
+        <div class="main-content">
+            <div class="card">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-group">
+                        <div class="skill-group-title">Testing Expertise</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Manual Testing</span>
+                            <span class="skill-tag">Functional Testing</span>
+                            <span class="skill-tag">API Testing</span>
+                            <span class="skill-tag">Performance Testing</span>
+                            <span class="skill-tag">Regression Testing</span>
+                            <span class="skill-tag">Integration Testing</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">Tools & Technologies</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">JIRA</span>
+                            <span class="skill-tag">Postman</span>
+                            <span class="skill-tag">Selenium</span>
+                            <span class="skill-tag">JMeter</span>
+                            <span class="skill-tag">TestNG</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group-title">Methodologies</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Agile/Scrum</span>
+                            <span class="skill-tag">SDLC</span>
+                            <span class="skill-tag">STLC</span>
+                            <span class="skill-tag">Sprint Planning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">Domain Expertise</h2>
+                <div class="domains-container">
+                    <div class="domain-tag">Logistics & Freight</div>
+                    <div class="domain-tag">Healthcare Tech</div>
+                    <div class="domain-tag">E-commerce</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="main-content">
+            <div class="card full-width">
+                <h2 class="section-title">Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title-exp">Quality Assurance Engineer</div>
+                        <div class="company-name">FreightGain (Logistics Platform) | Openspace Services Pvt Ltd</div>
+                        <div class="job-period">June 2024 - Present</div>
+                    </div>
+                    <ul class="achievements">
+                        <li class="achievement">Led QA efforts for a web-based freight forwarding platform, successfully completing testing for the Sea Freight module and currently leading the Air Freight module initiative</li>
+                        <li class="achievement">Authored and maintained 150+ detailed test cases and test data for core modules (Booking, Tracking), analyzing execution results to compile comprehensive test reports for stakeholders</li>
+                        <li class="achievement">Performed rigorous API testing on 50+ endpoints using Postman to validate data exchange and ensure data integrity between stakeholders</li>
+                        <li class="achievement">Actively contributed to Agile ceremonies and collaborated with the product team to track defects in JIRA, ensuring timely and quality delivery</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title-exp">QA Engineer</div>
+                        <div class="company-name">Quantum Corp Health (HealthTech Platform)</div>
+                        <div class="job-period">Previous Role</div>
+                    </div>
+                    <ul class="achievements">
+                        <li class="achievement">Executed end-to-end manual and database testing (SQL) on a complex HealthTech platform, validating data integrity for AI-generated reports across 700+ cities</li>
+                        <li class="achievement">Conducted performance and load testing using JMeter, providing actionable insights that led to a 15% improvement in website responsiveness</li>
+                        <li class="achievement">Managed the full defect lifecycle in JIRA, ensuring the accuracy of AI-generated reports and automated presentations</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title-exp">QA Tester</div>
+                        <div class="company-name">E-commerce & CMS Projects (WordPress)</div>
+                        <div class="job-period">Previous Projects</div>
+                    </div>
+                    <ul class="achievements">
+                        <li class="achievement">Performed complete end-to-end testing for 5+ client websites from requirement gathering to final delivery</li>
+                        <li class="achievement">Executed comprehensive manual testing ensuring full website functionality, cross-browser compatibility, and mobile responsiveness</li>
+                        <li class="achievement">Contributed to all Scrum ceremonies to ensure efficient and timely project execution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="main-content">
+            <div class="card full-width">
+                <h2 class="section-title">Education</h2>
+                <div class="education-grid">
+                    <div class="education-item">
+                        <div class="degree">Bachelor of Information Technology</div>
+                        <div class="institution">Thakur College of Science and Commerce, Mumbai</div>
+                        <div class="score">CGPA: 8.47</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="degree">Higher Secondary Education</div>
+                        <div class="institution">Nirmala Memorial Foundation College, Mumbai</div>
+                        <div class="score">Score: 84%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">Thank you for visiting my professional profile. I'm always open to new opportunities and challenges in Quality Assurance.</p>
+            <a href="#" class="download-btn" onclick="window.print()">📄 Download/Print Resume</a>
+        </footer>
+    </div>
+</body>
+</html>
