@@ -13,21 +13,28 @@
         }
         
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --light-blue: #ecf0f1;
-            --text-dark: #2c3e50;
-            --text-light: #7f8c8d;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --qa-primary: #1a237e;
+            --qa-secondary: #3949ab;
+            --qa-accent: #00c851;
+            --qa-warning: #ff6f00;
+            --qa-error: #d32f2f;
+            --qa-success: #388e3c;
+            --qa-bg-dark: #0d1421;
+            --qa-bg-light: #f8f9fa;
+            --qa-text: #263238;
+            --qa-text-light: #546e7a;
+            --qa-white: #ffffff;
+            --qa-shadow: 0 8px 32px rgba(26, 35, 126, 0.15);
+            --qa-glow: 0 0 20px rgba(57, 73, 171, 0.3);
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--qa-text);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #1a237e 100%);
             min-height: 100vh;
+            scroll-behavior: smooth;
         }
         
         .container {
@@ -36,18 +43,66 @@
             padding: 20px;
         }
         
+        /* QA-themed particles background */
+        .qa-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .qa-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--qa-accent);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+            opacity: 0.6;
+        }
+        
+        .qa-particle:nth-child(2n) {
+            background: var(--qa-secondary);
+            animation-duration: 20s;
+        }
+        
+        .qa-particle:nth-child(3n) {
+            background: var(--qa-warning);
+            animation-duration: 25s;
+        }
+        
         .website-header {
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+            background: var(--qa-white);
+            border-radius: 20px;
+            box-shadow: var(--qa-shadow);
             margin-bottom: 30px;
             overflow: hidden;
             animation: slideDown 0.8s ease-out;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .website-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--qa-primary), var(--qa-secondary), var(--qa-accent));
+            z-index: -1;
+            margin: -2px;
+            border-radius: inherit;
         }
         
         .hero-section {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: var(--white);
+            background: linear-gradient(135deg, var(--qa-primary) 0%, var(--qa-secondary) 50%, var(--qa-bg-dark) 100%);
+            color: var(--qa-white);
             padding: 60px 40px;
             text-align: center;
             position: relative;
@@ -61,14 +116,17 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255,255,255,0.03) 10px,
-                rgba(255,255,255,0.03) 20px
-            );
-            animation: float 20s linear infinite;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(0, 200, 81, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 111, 0, 0.1) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255,255,255,0.02) 20px,
+                    rgba(255,255,255,0.02) 40px
+                );
+            animation: float 30s linear infinite;
         }
         
         .hero-content {
@@ -77,38 +135,73 @@
         }
         
         .profile-photo {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            margin: 0 auto 20px;
+            background: linear-gradient(45deg, var(--qa-accent), var(--qa-secondary));
+            margin: 0 auto 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4em;
-            color: var(--white);
-            border: 5px solid rgba(255,255,255,0.3);
-            animation: pulse 2s infinite;
+            font-size: 4.5em;
+            font-weight: 700;
+            color: var(--qa-white);
+            border: 6px solid rgba(255,255,255,0.3);
+            animation: pulse-glow 3s infinite;
+            box-shadow: var(--qa-glow);
+            position: relative;
+        }
+        
+        .profile-photo::after {
+            content: '🔍';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.4em;
+            background: var(--qa-warning);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--qa-white);
+            animation: bounce 2s infinite;
         }
         
         .name {
-            font-size: 3em;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            font-size: 3.2em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .job-title {
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            opacity: 0.9;
-            font-weight: 300;
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            opacity: 0.95;
+            font-weight: 400;
+            position: relative;
+        }
+        
+        .qa-badge {
+            display: inline-block;
+            background: var(--qa-accent);
+            color: var(--qa-white);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-top: 10px;
+            animation: glow-pulse 2s infinite;
+            box-shadow: 0 0 15px rgba(0, 200, 81, 0.4);
         }
         
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
             margin-top: 30px;
         }
@@ -116,19 +209,22 @@
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: var(--white);
+            gap: 10px;
+            color: var(--qa-white);
             text-decoration: none;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 25px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 30px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.2);
+            font-weight: 500;
         }
         
         .contact-link:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--qa-glow);
         }
         
         .main-content {
@@ -139,17 +235,30 @@
         }
         
         .card {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: var(--shadow);
+            background: var(--qa-white);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--qa-shadow);
             animation: slideUp 0.8s ease-out;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(26, 35, 126, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--qa-accent), var(--qa-secondary), var(--qa-primary));
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(26, 35, 126, 0.2);
         }
         
         .full-width {
@@ -157,13 +266,22 @@
         }
         
         .section-title {
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--accent-color);
+            color: var(--qa-primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--qa-accent);
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: attr(data-icon);
+            font-size: 1.2em;
+            color: var(--qa-secondary);
         }
         
         .section-title::after {
@@ -171,75 +289,129 @@
             position: absolute;
             bottom: -3px;
             left: 0;
-            width: 50px;
+            width: 60px;
             height: 3px;
-            background: var(--primary-color);
+            background: var(--qa-primary);
+            border-radius: 2px;
         }
         
         .summary-text {
-            font-size: 1.1em;
+            font-size: 1.15em;
             line-height: 1.8;
-            color: var(--text-dark);
+            color: var(--qa-text);
+            text-align: justify;
         }
         
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
         
         .skill-group {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid var(--accent-color);
-            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid var(--qa-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-group::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--qa-accent), var(--qa-secondary));
+            border-radius: 0 15px 0 50px;
+            opacity: 0.1;
         }
         
         .skill-group:hover {
-            transform: translateX(5px);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: var(--qa-shadow);
         }
         
         .skill-group-title {
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-            font-size: 1.1em;
+            color: var(--qa-primary);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
         }
         
         .skill-tag {
-            background: var(--accent-color);
-            color: var(--white);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 500;
+            background: linear-gradient(135deg, var(--qa-secondary), var(--qa-primary));
+            color: var(--qa-white);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 600;
             transition: all 0.3s ease;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
         }
         
         .skill-tag:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
+            background: linear-gradient(135deg, var(--qa-accent), var(--qa-success));
+            transform: scale(1.08);
+            box-shadow: 0 5px 15px rgba(0, 200, 81, 0.3);
+        }
+        
+        .skill-tag:hover::before {
+            left: 100%;
         }
         
         .experience-item {
-            margin-bottom: 30px;
-            padding: 25px;
+            margin-bottom: 35px;
+            padding: 30px;
             background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border-radius: 10px;
-            border-left: 5px solid var(--accent-color);
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            border-left: 6px solid var(--qa-accent);
+            transition: all 0.4s ease;
+            position: relative;
+            scroll-margin-top: 100px;
+        }
+        
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            background: var(--qa-success);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
         }
         
         .experience-item:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
+            box-shadow: var(--qa-shadow);
+            transform: translateY(-5px);
+            border-left-color: var(--qa-success);
         }
         
         .experience-item:last-child {
@@ -247,143 +419,224 @@
         }
         
         .job-header {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .job-title-exp {
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
+            color: var(--qa-primary);
+            margin-bottom: 8px;
         }
         
         .company-name {
-            font-size: 1.1em;
+            font-size: 1.15em;
             font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 3px;
+            color: var(--qa-secondary);
+            margin-bottom: 5px;
         }
         
         .job-period {
-            color: var(--text-light);
+            color: var(--qa-text-light);
             font-style: italic;
+            font-weight: 500;
         }
         
         .achievements {
             list-style: none;
-            margin-top: 15px;
+            margin-top: 20px;
         }
         
         .achievement {
-            margin: 10px 0;
-            padding-left: 20px;
+            margin: 12px 0;
+            padding-left: 25px;
             position: relative;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 1.05em;
         }
         
         .achievement::before {
-            content: "→";
+            content: "✓";
             position: absolute;
             left: 0;
-            color: var(--accent-color);
+            color: var(--qa-success);
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.3em;
+            top: -2px;
         }
         
         .education-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
         }
         
         .education-item {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: var(--white);
-            padding: 25px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--qa-primary), var(--qa-secondary));
+            color: var(--qa-white);
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .education-item::before {
+            content: '🎓';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 4em;
+            opacity: 0.1;
         }
         
         .education-item:hover {
-            transform: scale(1.02);
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: var(--qa-glow);
         }
         
         .degree {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .institution {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             opacity: 0.9;
+            font-size: 1.05em;
         }
         
         .score {
             font-weight: 600;
-            font-size: 1.1em;
+            font-size: 1.15em;
+            color: var(--qa-accent);
         }
         
         .domains-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
         }
         
         .domain-tag {
-            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-            color: var(--white);
-            padding: 15px 25px;
-            border-radius: 30px;
+            background: linear-gradient(135deg, var(--qa-secondary), var(--qa-primary));
+            color: var(--qa-white);
+            padding: 18px 30px;
+            border-radius: 35px;
             font-weight: 600;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            cursor: default;
+            font-size: 1.1em;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .domain-tag::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: all 0.4s ease;
+            transform: translate(-50%, -50%);
         }
         
         .domain-tag:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 15px 30px rgba(26, 35, 126, 0.4);
+        }
+        
+        .domain-tag:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .footer {
             text-align: center;
-            padding: 40px 20px;
-            background: var(--white);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+            padding: 50px 30px;
+            background: var(--qa-white);
+            border-radius: 20px;
+            box-shadow: var(--qa-shadow);
             margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--qa-primary), var(--qa-secondary), var(--qa-accent), var(--qa-warning));
         }
         
         .footer-text {
-            color: var(--text-light);
-            font-size: 1em;
+            color: var(--qa-text-light);
+            font-size: 1.1em;
+            margin-bottom: 20px;
         }
         
         .download-btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-            color: var(--white);
-            padding: 15px 30px;
-            border-radius: 30px;
+            background: linear-gradient(135deg, var(--qa-accent), var(--qa-success));
+            color: var(--qa-white);
+            padding: 18px 35px;
+            border-radius: 35px;
             text-decoration: none;
             font-weight: 600;
+            font-size: 1.1em;
             margin-top: 20px;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
         }
         
         .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 200, 81, 0.4);
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--qa-primary), var(--qa-secondary), var(--qa-accent));
+            z-index: 1000;
+            transition: width 0.3s ease;
         }
         
         /* Animations */
         @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(-80px);
             }
             to {
                 opacity: 1;
@@ -394,7 +647,7 @@
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(80px);
             }
             to {
                 opacity: 1;
@@ -411,12 +664,63 @@
             }
         }
         
-        @keyframes pulse {
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse-glow {
             0%, 100% {
                 transform: scale(1);
+                box-shadow: var(--qa-glow);
             }
             50% {
                 transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(57, 73, 171, 0.5);
+            }
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(0, 200, 81, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(0, 200, 81, 0.7);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
             }
         }
         
@@ -432,7 +736,8 @@
             }
             
             .name {
-                font-size: 2.2em;
+                font-size: 2.5em;
+                letter-spacing: 2px;
             }
             
             .contact-links {
@@ -450,26 +755,32 @@
             }
             
             .container {
-                padding: 10px;
+                padding: 15px;
             }
             
             .card {
-                padding: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .name {
-                font-size: 1.8em;
-            }
-            
-            .job-title {
-                font-size: 1.2em;
+                padding: 25px;
             }
             
             .domains-container {
                 flex-direction: column;
                 align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .name {
+                font-size: 2em;
+            }
+            
+            .job-title {
+                font-size: 1.3em;
+            }
+            
+            .profile-photo {
+                width: 140px;
+                height: 140px;
+                font-size: 3.5em;
             }
         }
         
@@ -493,10 +804,30 @@
             .download-btn {
                 display: none;
             }
+            
+            .qa-particles {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- QA Particles Background -->
+    <div class="qa-particles">
+        <div class="qa-particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="qa-particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="qa-particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="qa-particle" style="left: 40%; animation-delay: 6s;"></div>
+        <div class="qa-particle" style="left: 50%; animation-delay: 8s;"></div>
+        <div class="qa-particle" style="left: 60%; animation-delay: 10s;"></div>
+        <div class="qa-particle" style="left: 70%; animation-delay: 12s;"></div>
+        <div class="qa-particle" style="left: 80%; animation-delay: 14s;"></div>
+        <div class="qa-particle" style="left: 90%; animation-delay: 16s;"></div>
+    </div>
+    
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
     <div class="container">
         <!-- Hero Section -->
         <header class="website-header">
@@ -505,6 +836,7 @@
                     <div class="profile-photo">KW</div>
                     <h1 class="name">KOMAL WAGH</h1>
                     <p class="job-title">Quality Assurance Engineer</p>
+                    <div class="qa-badge">🔍 Test • Verify • Ensure Quality</div>
                     <div class="contact-links">
                         <a href="tel:+919082120942" class="contact-link">
                             📱 +91 9082120942
@@ -512,7 +844,7 @@
                         <a href="mailto:waghkomal2003@gmail.com" class="contact-link">
                             ✉️ waghkomal2003@gmail.com
                         </a>
-                        <a href="https://www.linkedin.com/in/komalcode/" target="_blank" class="contact-link">
+                        <a href="https://www.linkedin.com/in/komalwagh14/" target="_blank" rel="noopener noreferrer" class="contact-link">
                             🔗 LinkedIn Profile
                         </a>
                     </div>
@@ -523,20 +855,20 @@
         <!-- Professional Summary -->
         <div class="main-content">
             <div class="card full-width">
-                <h2 class="section-title">Professional Summary</h2>
+                <h2 class="section-title" data-icon="📋">Professional Summary</h2>
                 <p class="summary-text">
                     Results-driven QA Engineer with 1+ year of experience in manual testing of complex web applications. Deep understanding of the full software development life cycle (SDLC) and all QA phases. Expertise in API testing with Postman, Performance testing with JMeter, and Database testing using SQL. Highly proficient in JIRA for defect tracking, creating detailed test cases, and actively contributing to Agile/Scrum ceremonies to improve development processes.
                 </p>
             </div>
         </div>
 
-        <!-- Skills and Experience -->
+        <!-- Skills and Domain Expertise -->
         <div class="main-content">
             <div class="card">
-                <h2 class="section-title">Technical Skills</h2>
+                <h2 class="section-title" data-icon="🛠️">Technical Skills</h2>
                 <div class="skills-container">
                     <div class="skill-group">
-                        <div class="skill-group-title">Testing Expertise</div>
+                        <div class="skill-group-title">🧪 Testing Expertise</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Manual Testing</span>
                             <span class="skill-tag">Functional Testing</span>
@@ -547,7 +879,7 @@
                         </div>
                     </div>
                     <div class="skill-group">
-                        <div class="skill-group-title">Tools & Technologies</div>
+                        <div class="skill-group-title">⚙️ Tools & Technologies</div>
                         <div class="skill-tags">
                             <span class="skill-tag">JIRA</span>
                             <span class="skill-tag">Postman</span>
@@ -558,7 +890,7 @@
                         </div>
                     </div>
                     <div class="skill-group">
-                        <div class="skill-group-title">Methodologies</div>
+                        <div class="skill-group-title">📊 Methodologies</div>
                         <div class="skill-tags">
                             <span class="skill-tag">Agile/Scrum</span>
                             <span class="skill-tag">SDLC</span>
@@ -570,11 +902,11 @@
             </div>
 
             <div class="card">
-                <h2 class="section-title">Domain Expertise</h2>
+                <h2 class="section-title" data-icon="🎯">Domain Expertise</h2>
                 <div class="domains-container">
-                    <div class="domain-tag">Logistics & Freight</div>
-                    <div class="domain-tag">Healthcare Tech</div>
-                    <div class="domain-tag">E-commerce</div>
+                    <a href="#logistics-project" class="domain-tag">🚚 Logistics & Freight</a>
+                    <a href="#healthcare-project" class="domain-tag">🏥 Healthcare Tech</a>
+                    <a href="#ecommerce-project" class="domain-tag">🛒 E-commerce</a>
                 </div>
             </div>
         </div>
@@ -582,11 +914,11 @@
         <!-- Professional Experience -->
         <div class="main-content">
             <div class="card full-width">
-                <h2 class="section-title">Professional Experience</h2>
+                <h2 class="section-title" data-icon="💼">Professional Experience</h2>
                 
-                <div class="experience-item">
+                <div class="experience-item" id="logistics-project">
                     <div class="job-header">
-                        <div class="job-title-exp">Quality Assurance Engineer</div>
+                        <div class="job-title-exp">🚚 Quality Assurance Engineer</div>
                         <div class="company-name">FreightGain (Logistics Platform) | Openspace Services Pvt Ltd</div>
                         <div class="job-period">June 2024 - Present</div>
                     </div>
@@ -598,9 +930,9 @@
                     </ul>
                 </div>
 
-                <div class="experience-item">
+                <div class="experience-item" id="healthcare-project">
                     <div class="job-header">
-                        <div class="job-title-exp">QA Engineer</div>
+                        <div class="job-title-exp">🏥 QA Engineer</div>
                         <div class="company-name">Quantum Corp Health (HealthTech Platform)</div>
                         <div class="job-period">Previous Role</div>
                     </div>
@@ -611,9 +943,9 @@
                     </ul>
                 </div>
 
-                <div class="experience-item">
+                <div class="experience-item" id="ecommerce-project">
                     <div class="job-header">
-                        <div class="job-title-exp">QA Tester</div>
+                        <div class="job-title-exp">🛒 QA Tester</div>
                         <div class="company-name">E-commerce & CMS Projects (WordPress)</div>
                         <div class="job-period">Previous Projects</div>
                     </div>
@@ -629,7 +961,7 @@
         <!-- Education -->
         <div class="main-content">
             <div class="card full-width">
-                <h2 class="section-title">Education</h2>
+                <h2 class="section-title" data-icon="🎓">Education</h2>
                 <div class="education-grid">
                     <div class="education-item">
                         <div class="degree">Bachelor of Information Technology</div>
@@ -647,9 +979,129 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p class="footer-text">Thank you for visiting my professional profile. I'm always open to new opportunities and challenges in Quality Assurance.</p>
+            <p class="footer-text">🔍 Thank you for visiting my QA professional profile. I'm always open to new opportunities and challenges in Quality Assurance.</p>
             <a href="#" class="download-btn" onclick="window.print()">📄 Download/Print Resume</a>
         </footer>
     </div>
+
+    <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for domain tags
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    // Add a highlight effect
+                    target.style.boxShadow = '0 0 30px rgba(0, 200, 81, 0.5)';
+                    target.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        target.style.boxShadow = '';
+                        target.style.transform = '';
+                    }, 2000);
+                }
+            });
+        });
+
+        // Add interactive particles animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'qa-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            
+            const colors = ['var(--qa-accent)', 'var(--qa-secondary)', 'var(--qa-warning)'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.querySelector('.qa-particles').appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 25000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 2000);
+
+        // Add hover effects to skill tags
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(2deg)';
+            });
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Add animation delay to cards for staggered effect
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.animationDelay = (index * 0.1) + 's';
+        });
+
+        // Interactive contact links with confirmation
+        document.querySelector('a[href^="tel:"]').addEventListener('click', function(e) {
+            if (!confirm('Do you want to call +91 9082120942?')) {
+                e.preventDefault();
+            }
+        });
+
+        document.querySelector('a[href^="mailto:"]').addEventListener('click', function(e) {
+            if (!confirm('Do you want to send an email to waghkomal2003@gmail.com?')) {
+                e.preventDefault();
+            }
+        });
+
+        // Add typing effect to job title
+        const jobTitle = document.querySelector('.job-title');
+        const originalText = jobTitle.textContent;
+        jobTitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                jobTitle.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Start typing effect after page load
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 1000);
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
